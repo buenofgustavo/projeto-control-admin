@@ -1,0 +1,78 @@
+
+*Proventos
+19 - Diferença de salários - coluna separada
+25- ADICIONAL NOTURNO (INFOR) + 8924 - REFLEXO HORAS ADIC. NOTURNO DSR
+264 - AJUDA DE CUSTO 
+3110 - auxilio combustível
+77 - AUXILIO MORADIA
+210 - HORAS EXTRAS 100% + 228 - HORAS EXTRAS 100%  MA
+209 - HORAS EXTRAS 50% 
+280 - PREMIO PERMANENCIA
+2430 - PREMIO TEMPO DE SERVICO + 2431 - PREMIO TEMPO DE SERVICO SINFAR
+8125 - REFLEXO HORAS EXTRAS DSR
+995 - SALARIO FAMILIA
+
+
+*Base
+8797 - 
+8781 - Dias Normais
+
+*Gratificações
+20 - gratificação 
+79 - GRATIFICACAO DE FUNCAO
+286 - HONORARIOS
+213 - REFLEXO DSR HONORARIOS
+201 - dsr
+168 - bonific. estagiarios - comparar com total variável
+
+*Outros
+225 - AUXILIO COMBUSTIVEL MES ANTERIOR - outros
+9522 - DIAS AFAST. P/DOENCA IGUAL/INF. 15 DIAS
+8785 - DIAS AFAST.INSS (P/DOENCA)
+8786 - DIAS AFAST.P/ACID.TRABALHO
+990 - ESTOURO DO MES
+836 - INSS DIF FER DESC A MAIOR
+892 - MEDIA AFAST ACID TRABALHO
+9542 - MEDIA AFAST DOEN DIR.INT IGUAL/INF 15 D
+896 - Media AFAST DOENCA
+894 - MEDIA LIC. MATERNIDADE
+208 - REEMBOLSO
+8784 - SALARIO MATERNIDADE DIAS
+afastamento, reembolso, estorno faltas/dsr
+
+
+
+
+*Férias 
+8810 - BOLSA AUXILIO DIAS DE FERIAS
+8783 - DIAS FERIAS
+8192 - DIFERENCA ADICIONAL FERIAS
+8112 - DIFERENCA DE 1/3 DE FERIAS
+940 - DIFERENCA DE FERIAS
+8189 - DIFERENCA MEDIA HORA FERIAS
+8190 - DIFERENCA MEDIA VALOR FERIAS
+806 - MEDIA HORAS FERIAS
+805- MEDIA VALOR FERIAS
+807 - VANTAGENS FERIAS
+
+Rener pode aprovar tendo diferenças, menos tendo diferença na variável
+
+
+***** CORREÇÕES *****
+
+Concluídos
+OK - retirar botão aprovar quando o Rener aprovar, na parte da pontuação
+OK - inserir mês/ano no log colaborador
+OK - inserir id colaborador do DP
+OK - inserir id no log
+OK - inserir id antes da coluna com nome da pessoa em pontuação
+OK - inserir id no relatório
+OK - retirar hora extra em cadastro de colaboradores
+OK - Correção de salário, habilitar um campo ajuste salarial, depois que o gestor aprovar e antes da aprovação do Rener, esse campo servira para diminuir a base
+OK - Retirar complementar e deixar para um segundo momento
+OK - Tirar o dashboard para o gestor
+OK - Retirar espaço em cima do botão pontuação
+OK - Frase alterado pelo dp, gestor
+OK - calcular automático o prv final
+
+

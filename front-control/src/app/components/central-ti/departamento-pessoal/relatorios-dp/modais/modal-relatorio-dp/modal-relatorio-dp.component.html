@@ -1,0 +1,53 @@
+<div style="max-width: 1500px; max-height: 650px; background-color: white; overflow: hidden;">
+  <mat-tab-group>
+    <mat-tab label="Relatórios">
+      <div style="margin: 1rem 2rem 2rem 2rem">
+
+        <form class="form-grid">
+
+          <nb-form-field class="form-field">
+            <div>
+              <label for="mes">Mês</label>
+              <nb-select [(ngModel)]="mesSelecionado" required name="mes"
+                 required>
+                <nb-option value="JANEIRO">Janeiro</nb-option>
+                <nb-option value="FEVEREIRO">Fevereiro</nb-option>
+                <nb-option value="MARCO">Março</nb-option>
+                <nb-option value="ABRIL">Abril</nb-option>
+                <nb-option value="MAIO">Maio</nb-option>
+                <nb-option value="JUNHO">Junho</nb-option>
+                <nb-option value="JULHO">Julho</nb-option>
+                <nb-option value="AGOSTO">Agosto</nb-option>
+                <nb-option value="SETEMBRO">Setembro</nb-option>
+                <nb-option value="OUTUBRO">Outubro</nb-option>
+                <nb-option value="NOVEMBRO">Novembro</nb-option>
+                <nb-option value="DEZEMBRO">Dezembro</nb-option>
+              </nb-select>
+            </div>
+          </nb-form-field>
+
+          <nb-form-field class="form-field">
+            <div>
+              <label for="ano" style="display: block; margin-top: 0px;">Ano</label>
+              <nb-select [(ngModel)]="anoSelecionado" required name="ano"
+                style="width: 100%;" required>
+                <nb-option value=2024>2024</nb-option>
+                <nb-option value=2025>2025</nb-option>
+                <nb-option value=2026>2026</nb-option>
+                <nb-option value=2027>2027</nb-option>
+                <nb-option value=2028>2028</nb-option>
+              </nb-select>
+            </div>
+          </nb-form-field>
+
+        </form>
+
+        <div class="button-container">
+          <button class="button" (click)="gerarRelatorios()"
+            style="width: 40%; height: 40px; margin-top: 10px; padding-left: 30px; padding-right: 30px;" nbButton
+            status="basic">GERAR</button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,16 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 16px;
+}
+
+.nb-form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.todos-inputs {
+  width: 90%;
+  box-sizing: border-box;
+}
+

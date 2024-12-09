@@ -1,0 +1,226 @@
+<div
+  style="max-width: 780px; min-width: 780px; max-height: 950px; min-height: 435px;  background-color: white; margin-top: 15px;  margin-left: 120px;">
+
+  <mat-tab-group>
+
+    <mat-tab label="Cadastro de Colaborador">
+      <div style="margin-left: 40px; margin-bottom: 25px; margin-top: 10px;">
+
+
+        <form class="form-grid">
+
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="dadosColaboradores.dpid">ID DP</label>
+              <input required class="todos-inputs" id="dadosColaborador.dpid" type="number" nbInput
+                name="dadosColaborador.dpid" [(ngModel)]="dadosColaboradores.dpid" required>
+            </nb-form-field>
+          </div>
+
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="dadosColaboradores.nome">Nome Completo</label>
+              <input required class="todos-inputs" id="dadosColaborador.nome" nbInput name="dadosColaborador.nome"
+                [(ngModel)]="dadosColaboradores.nome" required>
+            </nb-form-field>
+            <nb-form-field>
+              <label for="dadosColaboradores.numero">Número de telefone</label>
+              <input required [textMask]="{mask: telefoneMask}" class="todos-inputs" for="dadosColaboradores.numero"
+                id="dadosColaboradores.numero" nbInput placeholder="" name="dadosColaboradores.telefone"
+                [(ngModel)]="dadosColaboradores.numero" required (paste)="preventCopyPaste($event)">
+            </nb-form-field>
+          </div>
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="dadosColaboradores.cpf"
+                [ngClass]="{'label-error': dadosColaboradores.cpf && !validarCPF(dadosColaboradores.cpf)}">CPF</label>
+              <div style="display: flex;">
+                <input required [textMask]="{mask: cpfMask}" class="todos-inputs" for="dadosColaboradores.cpf"
+                  id="dadosColaboradores.cpf" nbInput placeholder="" name="dadosColaboradores.cpf"
+                  [(ngModel)]="dadosColaboradores.cpf" required
+                  [ngClass]="{'input-error': !validarCPF(dadosColaboradores.cpf)}">
+              </div>
+            </nb-form-field>
+            <nb-form-field class="form-field">
+              <label for="dadosColaboradores.filial">Unidade</label>
+              <nb-select required placeholder="" for="dadosColaboradores.filial" name="dadosColaboradores.filial"
+                [(ngModel)]="dadosColaboradores.filial" required>
+                <nb-option *ngFor="let filial of filial" [value]="filial.filiais">
+                  {{filial.filiais}}
+                </nb-option>
+              </nb-select>
+            </nb-form-field>
+          </div>
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="dadosColaboradores.cargo">Cargo</label>
+              <input required class="todos-inputs" id="dadosColaboradores.cargo" for="dadosColaboradores.cargo" nbInput
+                placeholder="" name="cargo" [(ngModel)]="dadosColaboradores.cargo" required>
+            </nb-form-field>
+            <nb-form-field class="form-field">
+              <label for="dadosColaboradores.departamento">Departamento</label>
+              <nb-select required for="dadosColaboradores.departamento" placeholder="" name="perfis"
+                [(ngModel)]="dadosColaboradores.departamento" required>
+                <nb-option *ngFor="let departamento of departamento" [value]="departamento.departamento">
+                  {{departamento.departamento}}
+                </nb-option>
+              </nb-select>
+            </nb-form-field>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div>
+              <label for="dadosColaboradores.regimeContratacao" style="display: block; margin-top: 9px;">Regime de
+                Contratação:</label>
+              <nb-select required name="perfis" [(ngModel)]="dadosColaboradores.regimeContratacao" style="width: 100%;"
+                required>
+                <nb-option value="CLT">CLT</nb-option>
+                <nb-option value="PJ">PJ</nb-option>
+                <nb-option value="Estagiário">Estagiário</nb-option>
+              </nb-select>
+            </div>
+            <div>
+              <label for="anexos" style="display: block; margin-top: 9px;">Anexos</label>
+              <input nbInput shape="semi-round" type="file" (change)="onFileChange($event)"
+                style="width: 100%; margin-bottom: 1rem;">
+            </div>
+          </div>
+        </form>
+
+        <button style="margin-top: 9px;" class="button" [disabled]="isFormEmpty()" (click)="create()"
+          nbButton>Cadastrar</button>
+      </div>
+
+    </mat-tab>
+
+
+    <mat-tab label="Combinação Salarial">
+      <div style="margin-left: 40px; margin-bottom: 25px; margin-top: 10px;">
+
+        <form class="form-grid">
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="base">Base</label>
+              <input required class="todos-inputs" id="base" type="number" nbInput name="base" required
+                [(ngModel)]="combinacaoSalarial.base">
+            </nb-form-field>
+            <nb-form-field>
+              <label for="prv">PRV</label>
+              <input [(ngModel)]="combinacaoSalarial.prv" type="number" required class="todos-inputs" id="prv" nbInput name="prv"
+                required>
+            </nb-form-field>
+
+          </div>
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="ajudaCusto">Ajuda de Custo</label>
+              <input [(ngModel)]="combinacaoSalarial.ajudaCusto" type="number" required class="todos-inputs" id="ajudaCusto" nbInput
+                name="ajudaCusto" required>
+            </nb-form-field>
+            <nb-form-field>
+              <label for="auxilioCombustivel">Auxílio Combustível</label>
+              <input [(ngModel)]="combinacaoSalarial.auxilioCombustivel" required class="todos-inputs"
+                for="auxilioCombustivel" id="auxilioCombustivel" type="number" nbInput placeholder="" name="auxilioCombustivel"
+                required>
+            </nb-form-field>
+          </div>
+          <div class="div-cadastro">
+            <nb-form-field>
+              <label for="auxilioMoradia">Auxílio Moradia</label>
+              <input [(ngModel)]="combinacaoSalarial.auxilioMoradia" type="number" required class="todos-inputs" id="auxilioMoradia"
+                nbInput name="auxilioMoradia" required>
+            </nb-form-field>
+            <nb-form-field>
+              <div>
+                <label for="possuiGratFunc" style="display: block; margin-top: 9px;">Gratificação de Função</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.possuiGratFunc" required name="possuiGratFunc"
+                  style="width: 100%;" required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+          </div>
+          
+          <div class="div-cadastro">
+
+            <nb-form-field>
+              <div>
+                <label for="chat" style="display: block; margin-top: 9px;">Chat</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.chat" required name="chat" style="width: 100%;" required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+            <nb-form-field>
+              <div>
+                <label for="comissao" style="display: block; margin-top: 9px;">Comissão</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.comissao" required name="comissao" style="width: 100%;"
+                  required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+
+          </div>
+
+          <div class="div-cadastro">
+            <nb-form-field>
+              <div>
+                <label for="VA" style="display: block; margin-top: 9px;">VA</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.valeAlimentacao" required name="VA" style="width: 100%;"
+                  required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+            <nb-form-field>
+              <div>
+                <label for="VR" style="display: block; margin-top: 9px;">VR</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.valeRefeicao" required name="VR" style="width: 100%;"
+                  required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+
+            </nb-form-field>
+          </div>
+
+
+          <div class="div-cadastro">
+            <!-- <nb-form-field>
+              <div>
+                <label for="horaExtra" style="display: block; margin-top: 9px;">Hora Extra</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.horaExtra" required name="horaExtra"
+                  style="width: 100%;" required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field> -->
+            <nb-form-field>
+              <div>
+                <label for="valeTransporte" style="display: block; margin-top: 9px;">Vale Transporte</label>
+                <nb-select [(ngModel)]="combinacaoSalarial.valeTransporte" required name="valeTransporte"
+                  style="width: 100%;" required>
+                  <nb-option value=true>Sim</nb-option>
+                  <nb-option value=false>Não</nb-option>
+                </nb-select>
+              </div>
+            </nb-form-field>
+          </div>
+
+        </form>
+
+      </div>
+
+    </mat-tab>
+
+
+
+  </mat-tab-group>
+
+</div>

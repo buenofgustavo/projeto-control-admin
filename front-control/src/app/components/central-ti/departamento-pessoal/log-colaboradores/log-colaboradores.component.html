@@ -1,0 +1,74 @@
+<div style="margin-bottom: 2rem; display: flex; align-items: center;">
+    <div style="flex: 1;">
+        <nb-select placeholder="Selecione um Filtro" [(ngModel)]="selectedFilter">
+            <nb-option value="dpid">Buscar por ID</nb-option>
+            <nb-option value="nome">Buscar por Nome</nb-option>
+            <nb-option value="tipo">Buscar por Tipo</nb-option>
+            <nb-option value="cpf">Buscar por CPF</nb-option>
+            <nb-option value="mesAno">Buscar por Mês (escrito) /Ano</nb-option>
+            <nb-option value="usuario">Buscar por Usuário</nb-option>
+
+        </nb-select>
+        <div *ngIf="selectedFilter" class="search-input">
+            <input nbInput [(ngModel)]="filterValue" type="text" placeholder="Digite sua busca" style="margin-top:1rem;"
+                (input)="applyFilter($event)" class="mat-elevation-z1">
+        </div>
+    </div>
+
+</div>
+
+<div style="margin-bottom: 0rem; display: flex; align-items: center; ">
+
+    <div style="margin-top: 0px; margin-bottom: 0px;  min-width: 98%; max-width: 100%;">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="dpid">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> ID DP </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.dpid}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Tipo </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.tipo}}
+                </td>
+            </ng-container>
+
+            <!-- CPF Column -->
+            <ng-container matColumnDef="nomeColaborador">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Nome Colaborador </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.nomeColaborador}} </td>
+            </ng-container>
+
+            <!-- Telefone Column -->
+            <ng-container matColumnDef="mensagem">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Mensagem </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.mensagem}} </td>
+            </ng-container>
+
+            <!-- Telefone Column -->
+            <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Usuário </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.usuario}} </td>
+            </ng-container>
+
+            <!-- Departamento Column -->
+            <ng-container matColumnDef="datahora">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Data e Hora </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.dataHora |
+                    date:'dd-MM-yyyy HH:mm'}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[8, 25, 100]" showFirstLastButtons aria-label="Select page">
+        </mat-paginator>
+
+        <div *ngIf="loading" class="loading-spinner-overlay">
+            <mat-spinner diameter="50"></mat-spinner>
+            <p>Carregando dados...</p>
+        </div>
+
+    </div>

@@ -1,0 +1,189 @@
+<div style="display: flex; gap: 20px; margin-bottom: 30px;">
+
+  <nb-form-field style="flex: 1; max-width: 200px;">
+    <div>
+      <label for="mes" style="display: block; margin-top: 0px;">Mês</label>
+      <nb-select (ngModelChange)="limparVariaveis()" [(ngModel)]="mesSelecionado" required name="mes"
+        style="width: 100%;" required>
+        <nb-option value="JANEIRO">Janeiro</nb-option>
+        <nb-option value="FEVEREIRO">Fevereiro</nb-option>
+        <nb-option value="MARCO">Março</nb-option>
+        <nb-option value="ABRIL">Abril</nb-option>
+        <nb-option value="MAIO">Maio</nb-option>
+        <nb-option value="JUNHO">Junho</nb-option>
+        <nb-option value="JULHO">Julho</nb-option>
+        <nb-option value="AGOSTO">Agosto</nb-option>
+        <nb-option value="SETEMBRO">Setembro</nb-option>
+        <nb-option value="OUTUBRO">Outubro</nb-option>
+        <nb-option value="NOVEMBRO">Novembro</nb-option>
+        <nb-option value="DEZEMBRO">Dezembro</nb-option>
+      </nb-select>
+    </div>
+  </nb-form-field>
+
+  <nb-form-field style="flex: 1; max-width: 200px;">
+    <div>
+      <label for="ano" style="display: block; margin-top: 0px;">Ano</label>
+      <nb-select (ngModelChange)="limparVariaveis()" [(ngModel)]="anoSelecionado" required name="ano"
+        style="width: 100%;" required>
+        <nb-option value=2024>2024</nb-option>
+        <nb-option value=2025>2025</nb-option>
+        <nb-option value=2026>2026</nb-option>
+        <nb-option value=2027>2027</nb-option>
+        <nb-option value=2028>2028</nb-option>
+      </nb-select>
+    </div>
+  </nb-form-field>
+
+  <div style="flex: 1;">
+    <button [disabled]="!mesSelecionado || !anoSelecionado || usuario.role != 'GESTOR' " (click)="buscarVariaveis()"
+      nbButton style="margin-top: 20px; margin-left: 10px;">
+      <nb-icon icon="search"></nb-icon>
+    </button>
+  </div>
+
+  <p style="margin-top: 25px;">{{usuario.departamento}}</p>
+
+</div>
+
+
+
+
+<div
+  style="width: 100%; max-height: 950px; background-color: white; margin-top: 0px; margin-left: 0px; border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); font-size: 14px; overflow-y: auto; max-height: 400px;">
+
+  <div *ngFor="let colaborador of colaboradorComVariaveis"
+    style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 20px; align-items: center;">
+
+    <nb-form-field style="flex: 2; margin-right: 10px; font-size: 0.85rem;">
+      <label for="nome" style="font-size: 0.75rem; color: blue">{{colaborador.colaboradoresDTO.cargo}}</label>
+      <input disabled [(ngModel)]="colaborador.colaboradoresDTO.nome" required class="todos-inputs" id="nome" nbInput
+        name="nome" required style="font-size: 0.85rem; padding: 0.25rem;">
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 1; margin-right: 10px;">
+      <label for="base">Base</label>
+      <input disabled required class="todos-inputs" id="base" nbInput
+        [(ngModel)]="colaborador.combinacaoSalarialDTO.base">
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 1.55; margin-right: 10px;">
+      <label style="font-size: 0.65rem;" for="gratificacaoFuncao">Gratificação de Função</label>
+      <input disabled required class="todos-inputs" id="gratificacaoFuncao" nbInput
+        [(ngModel)]="colaborador.combinacaoSalarialDTO.gratificacaoFuncao" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 1.35; margin-right: 10px;">
+      <label style="font-size: 0.65rem;" for="auxilioCombustivel">Auxílio Combustível</label>
+      <input disabled [(ngModel)]="colaborador.combinacaoSalarialDTO.auxilioCombustivel" required class="todos-inputs"
+        id="auxilioCombustivel" nbInput name="auxilioCombustivel" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 1.1; margin-right: 10px;">
+      <label style="font-size: 0.70rem;" for="ajudaCusto">Ajuda de Custo</label>
+      <input disabled [(ngModel)]="colaborador.combinacaoSalarialDTO.ajudaCusto" required class="todos-inputs"
+        id="ajudaCusto" nbInput name="ajudaCusto" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 0.6; margin-right: 10px;">
+      <label for="PRV">PRV</label>
+      <input type="number"
+        [disabled]=" colaborador.variaveisColaboradoresDTO.aprovadoRener === true || colaborador.variaveisColaboradoresDTO.aprovadoGestor === true || colaborador.combinacaoSalarialDTO.prv == 0"
+        [(ngModel)]="colaborador.variaveisColaboradoresDTO.prv" required class="todos-inputs" id="PRV" nbInput
+        (ngModelChange)="calculosVariaveis(colaborador)" name="PRV" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 0.8; margin-right: 10px;">
+      <label for="comissao">Comissão</label>
+      <input type="number"
+        [disabled]=" colaborador.variaveisColaboradoresDTO.aprovadoRener === true || colaborador.combinacaoSalarialDTO.comissao === false || colaborador.variaveisColaboradoresDTO.aprovadoGestor === true"
+        [(ngModel)]="colaborador.variaveisColaboradoresDTO.comissao" required class="todos-inputs" id="comissao" nbInput
+        (ngModelChange)="calculosVariaveis(colaborador)" name="comissao" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 0.6; margin-right: 10px;">
+      <label for="chat">Chat</label>
+      <input
+        [disabled]=" colaborador.variaveisColaboradoresDTO.aprovadoRener === true || colaborador.combinacaoSalarialDTO.chat === false || colaborador.variaveisColaboradoresDTO.aprovadoGestor === true "
+        [(ngModel)]="colaborador.variaveisColaboradoresDTO.chat" type="number" required class="todos-inputs" id="chat"
+        (ngModelChange)="calculosVariaveis(colaborador)" nbInput name="chat" required>
+    </nb-form-field>
+
+
+
+    <nb-form-field class="small-form-field" style="flex: 0.8; margin-right: 10px;">
+      <label for="pontuacao">Pontuação</label>
+      <input disabled [(ngModel)]="colaborador.variaveisColaboradoresDTO.pontuacao" required class="todos-inputs"
+        id="pontuacao" nbInput name="pontuacao" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 0.8; margin-right: 10px;">
+      <label style="font-size: 0.7rem;" for="prvFinal">PRV Final</label>
+      <input disabled [(ngModel)]="colaborador.variaveisColaboradoresDTO.prvFinal" status="primary" required
+        class="todos-inputs" id="prvFinal" nbInput name="prvFinal" required>
+    </nb-form-field>
+
+    <nb-form-field class="small-form-field" style="flex: 1.1; margin-right: 10px;">
+      <label style="font-size: 0.7rem;" for="totalVariavel">Total Variável</label>
+      <input disabled [(ngModel)]="colaborador.variaveisColaboradoresDTO.totalVariavel" required class="todos-inputs"
+        id="totalVariavel" nbInput name="totalVariavel" required>
+    </nb-form-field>
+
+    <div style="flex: 0.4; display: flex; flex-direction: column; align-items: flex-start; margin-right: 10px;">
+      <label for="ativo" style="margin-top: -2px;">Ativo</label>
+      <nb-toggle
+        [disabled]="colaborador.variaveisColaboradoresDTO.aprovadoRener === true || colaborador.variaveisColaboradoresDTO.aprovadoGestor === true"
+        id="ativo" status="primary" (checkedChange)="onToggleChange($event, colaborador)"></nb-toggle>
+    </div>
+
+
+    <div style="flex: 1;"
+      *ngIf=" colaborador.variaveisColaboradoresDTO.aprovadoDp === false && colaborador.variaveisColaboradoresDTO.aprovadoRener === false ">
+      <div style="margin-bottom: 0px;">
+        <!-- Mensagem acima do botão -->
+        <p *ngIf="colaborador.variaveisColaboradoresDTO.aprovadoDp === false"
+          style="color: red; font-size: 10px; margin-left: 6px;">
+          Não lançado pelo DP
+        </p>
+      </div>
+      <button [ngClass]="{
+        'button-margin': colaborador.variaveisColaboradoresDTO.aprovadoDp === false,
+      }" (click)="atualizarVariaveis(colaborador)" class="button" status="primary" nbButton
+        style="width: 100%; border-radius: 8px; ">
+        Atualizar
+      </button>
+
+    </div>
+
+    <div style="flex: 1;" *ngIf=" colaborador.variaveisColaboradoresDTO.aprovadoDp">
+      <div style="margin-bottom: 0px;">
+        <!-- Mensagem acima do botão -->
+        <p *ngIf="colaborador.variaveisColaboradoresDTO.aprovadoGestor && !colaborador.variaveisColaboradoresDTO.aprovadoRener"
+          style="color: green; font-size: 15px; margin-left: 8px;">
+          Aprovado
+        </p>
+        <p *ngIf="colaborador.variaveisColaboradoresDTO.aprovadoDp && !colaborador.variaveisColaboradoresDTO.aprovadoRener && !colaborador.variaveisColaboradoresDTO.aprovadoGestor"
+          style="color: rgb(248, 11, 11); font-size: 12.8px; margin-left: 8px;  font-weight: bold;">
+          Alterado pelo DP
+        </p>
+        <p *ngIf="colaborador.variaveisColaboradoresDTO.aprovadoRener === true"
+          style="color: green; font-size: 10.8px; margin-left: 8px;">
+          Aprovado pelo Rener
+        </p>
+      </div>
+      <button [ngClass]="{
+        'button-margin': colaborador.variaveisColaboradoresDTO.aprovadoGestor || colaborador.variaveisColaboradoresDTO.aprovadoRener || colaborador.variaveisColaboradoresDTO.aprovadoDp ,
+        'button-margin-default': !colaborador.variaveisColaboradoresDTO.aprovadoGestor && !colaborador.variaveisColaboradoresDTO.aprovadoRener && !colaborador.variaveisColaboradoresDTO.aprovadoDp
+      }"
+        [disabled]=" colaborador.variaveisColaboradoresDTO.aprovadoGestor || colaborador.variaveisColaboradoresDTO.aprovadoRener"
+        (click)="aprovarVariaveis(colaborador)" class="button" status="success" nbButton
+        style="width: 100%; border-radius: 8px; margin-left: 9px;">
+        Aprovar
+      </button>
+    </div>
+
+
+
+  </div>
+
+</div>

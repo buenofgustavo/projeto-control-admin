@@ -1,0 +1,128 @@
+<div style="max-width: 1500px; max-height: 650px;  background-color: white; overflow: hidden;">
+
+    <mat-tab-group>
+
+        <mat-tab label="Computador">
+
+            <div style=" margin: 1rem 2rem 3rem 4rem">
+
+                <form class="form-grid">
+
+                    <nb-form-field>
+                        <label for="nomeComputador">Nome do Computador</label>
+                        <input disabled [(ngModel)]="data.computadoresCompleto.nomeComputador" class="todos-inputs"
+                            id="nome_do_computador" nbInput name="nome_do_computador">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="nomeUsuario">Nome de Usuário</label>
+                        <input disabled class="todos-inputs" id="nomeUsuario" nbInput name="nomeUsuario"
+                            [(ngModel)]="data.computadoresCompleto.nomeUsuario">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="Localizacao">Localização</label>
+                        <input disabled class="todos-inputs" id="Localizacao" nbInput name="Localizacao"
+                            [(ngModel)]="data.computadoresCompleto.localizacao">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="enderecoMAC">Endereco MAC</label>
+                        <input disabled class="todos-inputs" id="enderecoMAC" nbInput name="enderecoMAC"
+                            [(ngModel)]="data.computadoresCompleto.enderecoMac">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="marca">Marca</label>
+                        <input disabled class="todos-inputs" id="marca" nbInput name="marca"
+                            [(ngModel)]="data.computadoresCompleto.marca">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="modelo">Modelo</label>
+                        <input disabled class="todos-inputs" id="modelo" nbInput name="modelo"
+                            [(ngModel)]="data.computadoresCompleto.modelo">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="RAM">Memória Ram</label>
+                        <input disabled class="todos-inputs" id="RAM" nbInput name="RAM"
+                            [(ngModel)]="data.computadoresCompleto.memoriaRam">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="armazenamento">Armazenamento</label>
+                        <input disabled class="todos-inputs" id="armazenamento" nbInput name="armazenamento"
+                            [(ngModel)]="data.computadoresCompleto.capacidadeArmazenamento">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="processador">Processador</label>
+                        <input disabled class="todos-inputs" id="processador" nbInput name="processador"
+                            [(ngModel)]="data.computadoresCompleto.processador">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="makro">Makro</label>
+                        <input disabled class="todos-inputs" id="makro" nbInput name="makro"
+                            [(ngModel)]="data.computadoresCompleto.makroInstalado">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="versao_makro">Versão Makro</label>
+                        <input disabled class="todos-inputs" id="versao_makro" nbInput name="versao_makro"
+                            [(ngModel)]="data.computadoresCompleto.versaoMakro">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="userAtual">Usuário atual</label>
+                        <input disabled class="todos-inputs" id="userAtual" nbInput name="userAtual"
+                            [(ngModel)]="data.computadoresCompleto.nomeUserAtual">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="lastUser">Último usuário</label>
+                        <input disabled class="todos-inputs" id="lastUser" nbInput name="lastUser"
+                            [(ngModel)]="data.computadoresCompleto.nomeLastUser">
+                    </nb-form-field>
+
+                    <nb-form-field>
+                        <label for="serial">Serial</label>
+                        <input class="todos-inputs" id="serial" nbInput name="serial"
+                            [(ngModel)]="data.computadoresCompleto.serial">
+                    </nb-form-field>
+
+                    <button (click)="salvarSerial()" class="button" style="margin-top: 19px; width: 90%; height: 40px;"
+                        nbButton status="basic">SALVAR SERIAL
+                    </button>
+                    
+                        <nb-form-field *ngIf="!data.computadoresCompleto.userAtual">
+                            <label for="status">Status</label>
+                            <nb-select class="todos-inputs" placeholder="" name="status"
+                                [(ngModel)]="data.computadoresCompleto.status">
+                                <nb-option value="DISPONIVEL">DISPONÍVEL</nb-option>
+                                <nb-option value="EM TRANSPORTE">EM TRANSPORTE</nb-option>
+                                <nb-option value="FILIAL">FILIAL</nb-option>
+                                <nb-option value="REPARO">REPARO</nb-option>
+                                <nb-option value="SUCATA">SUCATA</nb-option>
+                                <nb-option value="ALERTA">ALERTA</nb-option>
+                            </nb-select>
+                        </nb-form-field>
+                        <button *ngIf="!data.computadoresCompleto.userAtual" (click)="salvarStatus()" class="button"
+                            style="margin-top: 19px; width: 90%; height: 40px;" nbButton status="basic">SALVAR STATUS
+                        </button>
+
+                    <nb-form-field>
+                        <label for="atualizadoPor">Atualizado Por</label>
+                        <input disabled class="todos-inputs" id="atualizadoPor" nbInput name="atualizadoPor"
+                            [(ngModel)]="data.computadoresCompleto.atualizadoPor">
+                    </nb-form-field>
+
+                </form>
+            </div>
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+</div>
